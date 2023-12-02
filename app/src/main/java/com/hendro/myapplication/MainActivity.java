@@ -9,12 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,20 +49,19 @@ public class MainActivity extends AppCompatActivity {
         binding.btDialog.setOnClickListener(v -> {
             //menampilkan dialog
             new AlertDialog.Builder(MainActivity.this)
-                    .setIcon(R.mipmap.ic_launcher)
-                    .setTitle(R.string.warn)
-                    .setMessage(R.string.how_are_you)
-                    .setCancelable(true)
-                    .setPositiveButton(R.string.ok, (dialog, which) -> Toast.makeText(getApplicationContext(),
-                            R.string.how_are_you,
-                            Toast.LENGTH_SHORT).show())
-                    .setNegativeButton(R.string.cancel, (dialog, which) -> Toast.makeText(getApplicationContext(),
-                            R.string.close,
-                            Toast.LENGTH_SHORT).show())
-                    .setNeutralButton(R.string.neutral, (dialogInterface, i) -> Toast.makeText(getApplicationContext(),
-                                    R.string.hello,
-                                    Toast.LENGTH_SHORT)
-                            .show()).show();
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(R.string.warn)
+                .setMessage(R.string.how_are_you)
+                .setCancelable(true)
+                .setPositiveButton(R.string.ok, (dialog, which) -> Toast.makeText(getApplicationContext(),
+                        R.string.how_are_you,
+                        Toast.LENGTH_SHORT).show())
+                .setNegativeButton(R.string.cancel, (dialog, which) -> Toast.makeText(getApplicationContext(),
+                        R.string.close,
+                        Toast.LENGTH_SHORT).show())
+                .setNeutralButton(R.string.neutral, (dialogInterface, i) -> Toast.makeText(getApplicationContext(),
+                        R.string.hello,
+                        Toast.LENGTH_SHORT).show());
         });
 
         binding.btKeluar.setOnClickListener(v -> {
@@ -112,30 +106,12 @@ public class MainActivity extends AppCompatActivity {
 
             mNotificationManager.notify(0, mBuilder.build());
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_item, menu);
-
-        //khusus proses search
-        MenuItem item = menu.findItem(R.id.m_find);
-        android.widget.SearchView searchView = (android.widget.SearchView) item.getActionView();
-        assert searchView != null;
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) { //ketika tekan enter
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) { //ketika text berubah
-                return false;
-            }
+        binding.btDetil.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, DetilActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplicationContext().startActivity(i);
         });
-
-        return super.onCreateOptionsMenu(menu);
     }
+
 }
