@@ -108,7 +108,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.btDetil.setOnClickListener(v -> {
+            String nama, alamat, prodi, domisili;
+            Boolean teknologi, kuliner;
+
+            //ambil nilai
+            nama = binding.etNama.getText().toString();
+            alamat = binding.etAlamat.getText().toString();
+            prodi = binding.spProdi.getSelectedItem().toString();
+            teknologi = binding.cbTeknologi.isChecked();
+            kuliner = binding.cbKuliner.isChecked();
+            domisili = binding.rgDomisili.toString();
+
+            /*
+            Selipkan data yang ingin dikirim ke detail activity
+            dengan putExtra
+            */
             Intent i = new Intent(MainActivity.this, DetilActivity.class);
+            i.putExtra("x_nama", nama);
+            i.putExtra("x_alamat", alamat);
+            i.putExtra("x_prodi", prodi);
+            i.putExtra("x_teknologi", teknologi); //boolean
+            i.putExtra("x_kuliner", kuliner); //boolean
+            i.putExtra("x_domisili", domisili);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplicationContext().startActivity(i);
         });
