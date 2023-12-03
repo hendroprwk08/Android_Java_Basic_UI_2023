@@ -8,19 +8,31 @@
     android:id="@+id/main_layout_id"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        app:title="@string/app_name"
-        app:titleTextColor="@color/white"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+        android:theme="@style/WhiteIconToolbar">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:title="@string/app_name"
+            app:titleCentered="true"
+            app:titleTextColor="@color/white"
+            app:menu="@menu/menu_item"
+
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Note: A RecyclerView can also be used -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,30 +40,33 @@
             android:orientation="vertical"
             android:padding="@dimen/dp_16">
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/full_name" />
+                android:layout_marginBottom="@dimen/dp_10"
+                android:hint="@string/full_name" >
 
-            <EditText
-                android:id="@+id/et_nama"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_48"
-                android:hint="@string/full_name" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/address" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/et_alamat"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top|left"
-                android:hint="@string/address"
-                android:inputType="textMultiLine"
-                android:lines="3" />
+                android:layout_marginBottom="@dimen/dp_10"
+                android:hint="@string/address" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -113,9 +128,9 @@
                 android:id="@+id/bt_detil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_exposure_plus_white_24"
                 android:backgroundTint="@android:color/holo_orange_light"
-                android:text="@string/detail"/>
+                android:text="@string/detail"
+                app:icon="@drawable/baseline_exposure_plus_white_24"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -123,10 +138,11 @@
                 android:orientation="horizontal">
 
                 <Button
+                    style="@style/Widget.Material3.Button.ElevatedButton"
                     android:id="@+id/bt_toast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dp_1"
+                    android:layout_marginEnd="@dimen/dp_1"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorAccent"
                     android:text="@string/toast"
@@ -137,10 +153,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginLeft="@dimen/dp_1"
+                    android:layout_marginStart="@dimen/dp_1"
                     android:backgroundTint="@android:color/holo_green_light"
                     android:text="@string/dialog"
-                    android:textColor="#fff" />
+                    android:textColor="#fff"
+                    style="?attr/materialIconButtonFilledStyle"/>
 
             </LinearLayout>
 
@@ -150,6 +167,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    style="@style/Widget.Material3.Button.TonalButton"
                     android:id="@+id/bt_notifikasi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,18 +180,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="@dimen/dp_1"
-                    android:text="@string/snack_bar" />
-
-                <Button
-                    android:id="@+id/bt_keluar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/close" />
+                    android:text="@string/snack_bar"
+                    style="?attr/materialButtonOutlinedStyle"/>
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/bt_keluar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/close"
+                style="@style/Widget.Material3.Button.TextButton.Icon"/>
+
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

@@ -17,7 +17,7 @@ public class DetilActivity extends AppCompatActivity {
         setContentView(view);
 
         // tombol back
-        setSupportActionBar(binding.toolbar);
+        setSupportActionBar(binding.topAppBar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
