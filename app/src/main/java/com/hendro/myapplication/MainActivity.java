@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.hendro.myapplication.databinding.ActivityMainBinding;
+import com.hendro.myapplication.fragment.FragmentActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         binding.toolbar.inflateMenu(R.menu.menu_item);
         binding.toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.m_fragment) {
-                Toast.makeText(getApplicationContext(), R.string.fragment, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, FragmentActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(i);
                 return true;
             } else if (item.getItemId() == R.id.m_recyclerView) {
                 Toast.makeText(getApplicationContext(), R.string.recyclerview, Toast.LENGTH_SHORT).show();

@@ -1,13 +1,10 @@
 package com.hendro.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.hendro.myapplication.databinding.ActivityDetilBinding;
-
 import java.util.Objects;
 
 public class DetilActivity extends AppCompatActivity {
@@ -34,9 +31,9 @@ public class DetilActivity extends AppCompatActivity {
 
         String kelas = i.getStringExtra("x_domisili");
         assert kelas != null;
-        if (kelas.equals("Luar Kota")){
+        if (kelas.equals("Luar Kota")) {
             binding.rbDK.setChecked(true);
-        }else{
+        } else {
             binding.rbLK.setChecked(true);
         }
     }

@@ -28,4 +28,9 @@
     <string name="neutral">Neutral</string>
     <string name="complete_warn">Name and Address have not been filled in</string>
     <string name="find">Find</string>
+    <string name="hello_blank_fragment">Halo fragment kosong</string>
+    <string name="circle">Circle</string>
+    <string name="cloud">Cloud</string>
+    <string name="square">Square</string>
+    <string name="back">Back</string>
 </resources>
