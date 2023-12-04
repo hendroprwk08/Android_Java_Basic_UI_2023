@@ -21,6 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.hendro.myapplication.databinding.ActivityMainBinding;
 import com.hendro.myapplication.fragment.FragmentActivity;
+import com.hendro.myapplication.recyclerview.RecyclerViewActivity;
 
 import java.util.Objects;
 
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 getApplicationContext().startActivity(i);
                 return true;
             } else if (item.getItemId() == R.id.m_recyclerView) {
-                Toast.makeText(getApplicationContext(), R.string.recyclerview, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, RecyclerViewActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(i);
                 return true;
             }
 
