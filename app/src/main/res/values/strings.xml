@@ -40,4 +40,6 @@
     <string name="cloud">Awan</string>
     <string name="square">Persegi</string>
     <string name="back">Kembali</string>
+    <string name="grid_list" translatable="false">Grid/List</string>
+    <string name="photo">Foto</string>
 </resources>

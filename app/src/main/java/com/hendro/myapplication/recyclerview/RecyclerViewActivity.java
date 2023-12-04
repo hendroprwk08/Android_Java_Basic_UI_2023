@@ -1,17 +1,23 @@
 package com.hendro.myapplication.recyclerview;
 
+import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.hendro.myapplication.R;
 import com.hendro.myapplication.databinding.ActivityRecyclerViewBinding;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class RecyclerViewActivity extends AppCompatActivity {
+    boolean grid = false;
+
     ArrayList<Presiden> list;
 
     // data yang dimasukkan
@@ -27,6 +33,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     ActivityRecyclerViewBinding binding;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,30 +41,73 @@ public class RecyclerViewActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        // tombol back
-        setSupportActionBar(binding.topAppBar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        showListRecyclerView();
 
-        showRecyclerView();
+        binding.topAppBar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.m_model) {
+                // ubah model
+                if (grid) {
+                    grid = false;
+                    binding.topAppBar.getMenu().findItem(R.id.m_model).setIcon(getDrawable(R.drawable.baseline_grid_view_white_24));
+                    showListRecyclerView();
+                } else {
+                    grid = true;
+                    binding.topAppBar.getMenu().findItem(R.id.m_model).setIcon(getDrawable(R.drawable.baseline_view_list_white_24));
+                    showGridRecyclerView();
+                }
+
+                return true;
+            }
+
+            return false;
+        });
+
+        binding.topAppBar.setNavigationOnClickListener(v -> finish());
     }
 
-    private void showRecyclerView() {
+    private void showListRecyclerView() {
         Presiden presiden;
 
         list = new ArrayList<>();
 
-        for (int i = 0; i < data.length; i++) {
+        for (String[] datum : data) {
             presiden = new Presiden();
-            presiden.setName(data[i][0]);
-            presiden.setRemarks(data[i][1]);
-            presiden.setPhoto(data[i][2]);
+            presiden.setName(datum[0]);
+            presiden.setRemarks(datum[1]);
+            presiden.setPhoto(datum[2]);
+
+            Log.i("TAG", "showListRecyclerView: " + presiden);
 
             list.add(presiden);
         }
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, list);
+        binding.recyclerView.setAdapter(adapter);
+    }
+
+    private void showGridRecyclerView() {
+        Presiden presiden;
+
+        list = new ArrayList<>();
+
+        for (String[] datum : data) {
+            presiden = new Presiden();
+            presiden.setName(datum[0]);
+            presiden.setRemarks(datum[1]);
+            presiden.setPhoto(datum[2]);
+
+            list.add(presiden);
+        }
+
+        //deteksi orientasi apakah landscape atau potrait
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        }
+
+        RecyclerViewGridAdapter adapter = new RecyclerViewGridAdapter(this, list);
         binding.recyclerView.setAdapter(adapter);
     }
 }

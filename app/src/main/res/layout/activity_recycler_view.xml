@@ -10,8 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:theme="@style/WhiteIconToolbar">
+        android:background="@color/colorPrimaryDark">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
@@ -20,7 +19,9 @@
             android:minHeight="?attr/actionBarSize"
             app:title="@string/app_name"
             app:titleCentered="true"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/baseline_arrow_back_white_24"
+            app:menu="@menu/menu_recycler_view"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

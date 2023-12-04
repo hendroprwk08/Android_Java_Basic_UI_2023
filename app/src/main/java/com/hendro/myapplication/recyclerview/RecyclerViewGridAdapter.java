@@ -6,42 +6,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.hendro.myapplication.databinding.GridItemBinding;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.hendro.myapplication.databinding.RowItemBinding;
-
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
+public class RecyclerViewGridAdapter extends RecyclerView.Adapter<RecyclerViewGridAdapter.RecyclerViewHolder>{
     private final Context context;
-    private final List<Presiden> list; // u/ menumpuk data, yang akan disimpan kedalam class Presiden
+    private final List<Presiden> list;
 
-    public RecyclerViewAdapter(Context context, List<Presiden> list) {
+    public RecyclerViewGridAdapter(Context context, List<Presiden> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public RecyclerViewAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // 1. binding - set view holder dengan binding
-        RowItemBinding binding = RowItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+    public RecyclerViewGridAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        GridItemBinding binding = GridItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new RecyclerViewHolder(binding.getRoot(), binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter.RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewGridAdapter.RecyclerViewHolder holder, int position) {
         // 3. binding - masukkan nilai ke objek
         holder.binding.tvItemName.setText(list.get(position).getName());
-        holder.binding.tvItemRemarks.setText(list.get(position).getRemarks());
 
         Glide.with(context)
                 .load(list.get(position).getPhoto())
                 .into(holder.binding.imgItemPhoto);
 
         holder.itemView.setOnClickListener(v -> Toast.makeText(context, list.get(position).getName(), Toast.LENGTH_SHORT).show());
+
     }
 
     @Override
@@ -50,10 +48,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        // 2. binding - ItemRowPresident disandingkan dengan RecyclerViewHolder
-        final RowItemBinding binding;
-
-        public RecyclerViewHolder(@NonNull View itemView, RowItemBinding binding) {
+        final GridItemBinding binding;
+        public RecyclerViewHolder(@NonNull View itemView, GridItemBinding binding) {
             super(itemView);
             this.binding = binding;
         }
