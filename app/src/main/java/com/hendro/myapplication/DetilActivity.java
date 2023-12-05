@@ -8,7 +8,6 @@ import com.hendro.myapplication.databinding.ActivityDetilBinding;
 import java.util.Objects;
 
 public class DetilActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
