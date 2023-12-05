@@ -42,4 +42,5 @@
     <string name="back">Kembali</string>
     <string name="grid_list" translatable="false">Grid/List</string>
     <string name="photo">Foto</string>
+    <string name="permission">Bolehkah kami mengakses notifikasi?</string>
 </resources>
