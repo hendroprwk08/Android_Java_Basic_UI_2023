@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/m_cari"
+        android:icon="@drawable/baseline_search_white_24"
+        app:showAsAction="always"
+        android:title="@string/find"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        tools:ignore="AlwaysShowAction" />
+
     <item android:id="@+id/m_fragment"
         app:showAsAction="never"
         android:title="@string/fragment"/>

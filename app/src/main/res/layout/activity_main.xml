@@ -22,7 +22,7 @@
             app:title="@string/app_name"
             app:titleCentered="true"
             app:titleTextColor="@color/white"
-            app:menu="@menu/menu_item" />
+            app:menu="@menu/menu_item"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

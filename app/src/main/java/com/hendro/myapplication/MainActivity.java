@@ -12,8 +12,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -21,7 +21,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.hendro.myapplication.databinding.ActivityMainBinding;
 import com.hendro.myapplication.fragment.FragmentActivity;
 import com.hendro.myapplication.recyclerview.RecyclerViewActivity;
-
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +47,21 @@ public class MainActivity extends AppCompatActivity {
             }
 
             return false;
+        });
+
+        //searchView dari menu (tdk bisa binding krn bkn layout)
+        SearchView searchView = findViewById(R.id.m_cari);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT ).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
         });
 
         //memberikan fungsi pada tombol
