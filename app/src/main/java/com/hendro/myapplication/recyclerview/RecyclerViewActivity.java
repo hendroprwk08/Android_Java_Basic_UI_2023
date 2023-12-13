@@ -40,7 +40,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
         binding = ActivityRecyclerViewBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+    }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @Override
+    protected void onStart() {
+        super.onStart();
         showListRecyclerView();
 
         binding.topAppBar.setOnMenuItemClickListener(item -> {

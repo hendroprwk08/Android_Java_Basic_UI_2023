@@ -12,26 +12,34 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.hendro.myapplication.databinding.ActivityMainBinding;
 import com.hendro.myapplication.fragment.FragmentActivity;
 import com.hendro.myapplication.recyclerview.RecyclerViewActivity;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         // menu topappbar
         binding.topAppBar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.m_fragment) {
@@ -54,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT ).show();
+                Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -72,21 +80,21 @@ public class MainActivity extends AppCompatActivity {
         binding.btDialog.setOnClickListener(v -> {
             //menampilkan dialog (Material3)
             new MaterialAlertDialogBuilder(this)
-                .setIcon(R.mipmap.ic_launcher)
-                .setTitle(R.string.warn)
-                .setMessage(R.string.how_are_you)
-                .setCancelable(true)
-                .setMessage(R.string.how_are_you)
-                .setPositiveButton(R.string.ok, (dialog, which) -> Toast.makeText(getApplicationContext(),
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setTitle(R.string.warn)
+                    .setMessage(R.string.how_are_you)
+                    .setCancelable(true)
+                    .setMessage(R.string.how_are_you)
+                    .setPositiveButton(R.string.ok, (dialog, which) -> Toast.makeText(getApplicationContext(),
                             R.string.how_are_you,
                             Toast.LENGTH_SHORT).show())
-                .setNegativeButton(R.string.cancel, (dialog, which) -> Toast.makeText(getApplicationContext(),
+                    .setNegativeButton(R.string.cancel, (dialog, which) -> Toast.makeText(getApplicationContext(),
                             R.string.close,
                             Toast.LENGTH_SHORT).show())
-                .setNeutralButton(R.string.neutral, (dialogInterface, i) -> Toast.makeText(getApplicationContext(),
+                    .setNeutralButton(R.string.neutral, (dialogInterface, i) -> Toast.makeText(getApplicationContext(),
                             R.string.hello,
                             Toast.LENGTH_SHORT).show())
-                .show();
+                    .show();
         });
 
         binding.btKeluar.setOnClickListener(v -> {
@@ -94,15 +102,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.btSnack.setOnClickListener(view1 -> {
-            View v = findViewById(R.id.main_layout_id);
+            View view = findViewById(R.id.main_layout_id);
             int duration = Snackbar.LENGTH_SHORT;
-            Snackbar.make(v, R.string.hello, duration).show();
+
+            Snackbar snackBar = Snackbar.make(view, R.string.hello, duration);
+            snackBar.setAction(R.string.close, v -> {
+                // Call your action method here
+                snackBar.dismiss();
+            });
+
+            snackBar.show();
         });
 
         binding.btNotifikasi.setOnClickListener(v -> {
             // apakah permission sudah diaktifkan pada ponsel?
-            if(NotificationManagerCompat.from(this).areNotificationsEnabled())
-            {
+            if (NotificationManagerCompat.from(this).areNotificationsEnabled()) {
                 //notifikasi
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(getApplicationContext(), "notify_001");
@@ -133,9 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 mNotificationManager.notify(0, mBuilder.build());
-            }
-            else
-            {
+            } else {
                 new MaterialAlertDialogBuilder(this)
                         .setIcon(R.mipmap.ic_launcher)
                         .setTitle(R.string.warn)
@@ -152,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                         .setNegativeButton(R.string.cancel, (dialog, which) -> {
 
                                 }
-                                )
+                        )
                         .show();
 
             }
@@ -184,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplicationContext().startActivity(i);
         });
-
 
     }
 
