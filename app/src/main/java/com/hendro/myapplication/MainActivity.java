@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-        //searchView dari menu (tdk bisa binding krn bkn layout)
+        //searchView dari menu (tdk bisa binding krn bkn 'layout')
         SearchView searchView = findViewById(R.id.m_cari);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
